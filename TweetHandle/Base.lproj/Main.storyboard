@@ -115,6 +115,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="ltv-uT-ppC" firstAttribute="leading" secondItem="ncf-fE-tI2" secondAttribute="leadingMargin" constant="25" id="2yp-m5-Hj8"/>
                                         <constraint firstItem="59E-8P-gc7" firstAttribute="centerY" secondItem="ncf-fE-tI2" secondAttribute="centerY" id="9bw-rV-Ngq"/>
@@ -127,6 +128,7 @@
                                         <constraint firstItem="59E-8P-gc7" firstAttribute="leading" secondItem="ncf-fE-tI2" secondAttribute="leadingMargin" constant="55" id="ppP-IO-hD5"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.82352941180000006" green="0.32549019610000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="profileImageView" destination="ltv-uT-ppC" id="RVM-ZK-x7J"/>
                                     <outlet property="screenNameLabel" destination="OD5-ni-WoH" id="LFg-0I-9vy"/>

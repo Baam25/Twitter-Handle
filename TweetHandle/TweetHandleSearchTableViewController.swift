@@ -16,6 +16,7 @@ class TweetHandleSearchTableViewController: UITableViewController {
     var handle = "@FlohNetwork"
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(TweetHandleSearchTableViewController.reloadData), for: .valueChanged)
         

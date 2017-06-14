@@ -52,7 +52,7 @@ class APIManager {
             
             let user = User(profile_image: profile_image, id: tUser!["id"]!.stringValue, name: tUser!["name"]!.stringValue, screen_name: tUser!["screen_name"]!.stringValue)
             
-            let tweet = Tweet(text: tTweet["text"]!.stringValue, created_at: tTweet["created_at"]?.stringValue.StringtoDate() ?? Date(), user: user)
+            let tweet = Tweet(text: tTweet["text"]!.stringValue, created_at: tTweet["created_at"]!.stringValue, user: user)
             
             tweets.append(tweet)
         }

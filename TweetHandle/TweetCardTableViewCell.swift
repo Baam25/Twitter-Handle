@@ -19,6 +19,7 @@ class TweetCardTableViewCell: UITableViewCell {
         super.awakeFromNib()
         tweetCardView.shapeView()
         profileImageView.elevateShawdow()
+        tweetCardView.elevateShawdow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,9 +31,9 @@ class TweetCardTableViewCell: UITableViewCell {
         
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: tweet.user?.profile_image?.url, placeholder: #imageLiteral(resourceName: "twitter"))
-        userNameLabel.text = tweet.user?.name ?? "Luke Skywalker"
-        screenNameLabel.text = tweet.user?.screen_name ?? "Jedi"
-        tweetLabel.text = tweet.text ?? "The last Jedi"
+        userNameLabel.text = tweet.user?.name
+        screenNameLabel.text = tweet.user?.screen_name
+        tweetLabel.text = tweet.text
 
         
     }

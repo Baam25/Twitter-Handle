@@ -16,7 +16,7 @@ class WelcomePageViewController: UIViewController {
     let defaults = UserDefaults.standard
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "twitter")!,iconInitialSize: CGSize(width: 60, height: 60), backgroundColor: UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1.0))
     let accountStore = ACAccountStore()
-    var accountType: ACAccountType!
+    var accountType: ACAccountType?
     
     @IBOutlet weak var logoImageView: UIImageView!
     
@@ -29,7 +29,12 @@ class WelcomePageViewController: UIViewController {
         
         accountType = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
         
-        if accountStore.accounts(with: accountType).count == 0 {
+        if let accounts = accountStore.accounts(with: accountType) {
+            if accounts.count == 0 {
+                redirectToSettings()
+            }
+        }
+        else{
             redirectToSettings()
         }
         setUpTwitterUI()
@@ -92,8 +97,7 @@ extension WelcomePageViewController{
         let constraint1 = NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: -30)
         let constraint2 = NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self.view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
         self.view.addConstraints([constraint1,constraint2])
-        //        let Yposition = self.view.center.y + 300
-        //        loginButton.center = CGPoint(x: self.view.center.x, y: Yposition)
+        
         
     }
     
@@ -119,11 +123,14 @@ extension WelcomePageViewController{
     func loadData(){
         APIManager.loadData { (error) in
             if (error != nil) {
-                print(error?.localizedDescription) //handle error
+                print(error!.localizedDescription) //handle error
             }
             else{
-                self.revealingSplashView.finishHeartBeatAnimation()
-                self.navigateTo(segueIdentifier: "ToTweetHandleSearch")
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).asyncAfter(deadline: .now() + 2.0, execute: { 
+                    self.revealingSplashView.finishHeartBeatAnimation()
+                    self.navigateTo(segueIdentifier: "ToTweetHandleSearch")
+                })
+                
             }
         }
     }
