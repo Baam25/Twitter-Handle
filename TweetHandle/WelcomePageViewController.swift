@@ -22,6 +22,7 @@ class WelcomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.isNavigationBarHidden = true
     }
 
@@ -46,9 +47,12 @@ class WelcomePageViewController: UIViewController {
 
     
     func isAlreadyAuthenticated() -> Bool {
-        guard let _ = defaults.value(forKey: "log_in_session") else{
+
+        guard let session = Twitter.sharedInstance().sessionStore.existingUserSessions().last as? TWTRSession else{
             return false
         }
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: session)
+        self.defaults.set(encodedData, forKey: "log_in_session")
         return true
     }
     
@@ -79,7 +83,7 @@ extension WelcomePageViewController{
                 return
             }
             
-            print("signed in as \(session.userName)")
+            print("signed in as \(session.userID)")
             let encodedData = NSKeyedArchiver.archivedData(withRootObject: session)
             self.defaults.set(encodedData, forKey: "log_in_session")
             
